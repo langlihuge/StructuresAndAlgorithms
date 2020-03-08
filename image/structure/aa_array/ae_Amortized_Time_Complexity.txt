@@ -1,0 +1,99 @@
+简单的时间复杂度分析
+public static int sum(int[] nums){
+    int sum = 0;
+    for(int num: nums) sum += num;
+    return sum;
+}
+
+O(n)
+n是nums中的元素个数
+算法和n呈线性关系
+
+• 为什什么要⽤用⼤大O，叫做O(n)？ 忽略略常数。实际时间 T = c1*n + c2
+
+T = 2*n + 2 O(n)
+T = 2000*n + 10000 O(n)
+T = 1*n*n + 0 O(n^2)
+T = 2*n*n + 300n + 10 O(n^2)
+
+渐进时间复杂度
+描述n趋近于⽆无穷的情况
+
+分析动态数组的时间复杂度
+
+添加操作  O(n)
+
+addLast(e)     O(1)             ⎫
+                                ⎬
+addFirst(e)    O(n)             ⎪  O(n)    resize O(n)
+                                ⎪  最坏情况
+add(index, e)  O(n/2) = O(n)    ⎭
+
+
+严格计算需要⼀一些概率论知识
+
+
+删除操作  O(n)
+
+removeLast(e)     O(1)             ⎫
+                                   ⎬
+removeFirst(e)    O(n)             ⎪  O(n)    resize O(n)
+                                   ⎪  最坏情况
+remove(index, e)  O(n/2) = O(n)    ⎭
+
+修改操作  O(1)
+set(index, e) O(1)
+
+查找操作
+get(index)  O(1)
+contains(e) O(n)
+find(e)     O(n)
+
+
+增 ： O(n)   如果只对最后⼀一个元素操作
+删 ： O(n)   依然是O(n)? 因为resize?
+改 ： 已知索引 O(1)；未知索引 O(n)
+查 ： 已知索引 O(1)；未知索引 O(n)
+
+
+resize的复杂度分析
+添加操作  O(n)
+
+addLast(e)     O(1)             ⎫
+                                ⎬
+addFirst(e)    O(n)             ⎪  O(n)    resize O(n)
+                                ⎪  最坏情况
+add(index, e)  O(n/2) = O(n)    ⎭
+
+假设当前capacity = 8，并且每⼀一次添加操作都使⽤用addLast
+1      1      1      1     1     1    1     1   8+1
+
+9次addLast操作，触发resize，总共进⾏行行了了17次基本操作
+平均，每次addLast操作，进⾏行行2次基本操作
+假设capacity = n，n+1次addLast，触发resize，总共进⾏行行2n+1次基本操作
+这样均摊计算，时间复杂度是O(1)的！
+在这个例例⼦子⾥里里，这样均摊计算，⽐比计算最坏情况有意义
+
+addLast 的均摊复杂度为O(1)
+同理理，我们看removeLast操作，均摊复杂度也为O(1)
+
+
+
+复杂度震荡
+但是，当我们同时看addLast和removeLast操作
+数组满了之后,调用addLast()扩容,然后再调用removeLast又会出现缩容
+addLast     O(n)
+removeLast  O(n)
+
+出现问题的原因：removeLast 时 resize 过于着急（Eager）
+解决⽅方案：Lazy
+
+当 size == capacity / 4 时，才将capacity减半
+
+
+
+
+
+
+
+
