@@ -25,6 +25,15 @@ public class Array<E> {
         this(10);
     }
 
+
+    public Array(E[] arr){
+        data = (E[])new Object[arr.length];
+        for(int i = 0; i < arr.length;i++){
+            data[i] = arr[i];
+        }
+        size = arr.length;
+    }
+
     /**
      * return the number of elements in the array
      * @return
@@ -215,6 +224,20 @@ public class Array<E> {
         if (index != -1){
             remove(index);
         }
+    }
+
+    /**
+     * swap two element
+     * @param i
+     * @param j
+     */
+    public void swap(int i, int j){
+        if(i < 0 || i >= size || j < 0 || j >= size){
+            throw new IllegalArgumentException("Index is Illegal");
+        }
+        E e = data[i];
+        data[i] = data[j];
+        data[j] = e;
     }
 
     private void resize(int newCapactiy){
