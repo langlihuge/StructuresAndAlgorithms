@@ -83,7 +83,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * @param index
      * @return
      */
-    private int rightChilde(int index){
+    private int rightChild(int index){
         return index * 2 + 2;
     }
 
@@ -156,7 +156,7 @@ public class MaxHeap<E extends Comparable<E>> {
             //insure have right child
             //so data[j] is biggest in the leftChild and rightChild
             if(j + 1 < data.getSize() && data.get(j + 1).compareTo(data.get(j)) > 0){
-                j = rightChilde(index);
+                j = rightChild(index);
             }
 
             if(data.get(index).compareTo(data.get(j)) < 0){
