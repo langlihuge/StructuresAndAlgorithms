@@ -9,6 +9,8 @@ package com.seatiger.structure.aj_segment_tree;
  *
  * here use an array that represent a complete binary tree to create an segment tree
  *
+ * test
+ *
  */
 public class SegmentTree<E> {
 
